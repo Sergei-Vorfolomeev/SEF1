@@ -22,3 +22,11 @@ const rangeOdd = (start: number, end: number): Array<number> => {
 };
 
 console.log(rangeOdd(15,30))
+
+// Реализуйте функцию average с сигнатурой average(a: number, b: number): number
+// вычисляющую среднее арифметическое своих аргументов.
+const average = (a: number, b: number): number => {
+    return (a + b) / 2
+};
+
+console.log(average(10,20)) // 15
