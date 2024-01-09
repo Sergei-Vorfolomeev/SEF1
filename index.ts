@@ -58,3 +58,61 @@ const calculate = (): number[] => {
 };
 
 console.log(calculate()) // [0, 1, 6, 18, 40, 75, 126, 196, 288,...]
+
+// Выполнить следующие пункты внутри функции fn (см. заготовку: 7-objects.js)
+// Создайте объект с одним полем name и присвойте его в константу.
+// Создайте объект с одним полем name и присвойте его в переменную.
+// Попробуйте поменять поле name у обоих объектов.
+// Попробуйте присвоить другой объект в оба идентификатора.
+// Объясните поведение кода и оставьте только рабочий код.
+
+const fn = () => {
+    const obj1 = { name: 'Sergey' }
+    let obj2 = { name: 'Sergey' }
+
+    obj1.name = 'Irina'
+    obj2.name = "Vadim"
+
+    obj2 = { name: 'Pushkin' }
+};
+
+// Реализуйте телефонную книгу на массиве объектов.
+// Объявите массив объектов с двумя полями: name и phone для хранения телефонной книги. Пример объекта: { name: 'Marcus Aurelius', phone: '+380445554433' } и добавьте несколько объектов в массив, чтоб было на чем проверять.
+// Реализуйте функцию findPhoneByName с сигнатурой findPhoneByName(name: string): string. При вызове функция должна находить объект, где поле name равно аргументу name и возвращать номер телефона из объекта. Для поиска воспользуйтесь циклом for. A. Реализуйте телефонную книгу на хеш-таблицах, т.е. справочниках (объектах).
+// Задайте справочник (объект) с ключами равными значениям поля name (из предыдущего примера) и значениями равными полю phone.
+// Реализуйте функцию findPhoneByName с сигнатурой findPhoneByName(name: string): string которая находит телефон в хеше по имени и возвращает номер телефона. Используйте hash[key] для поиска телефона.
+
+const contactsBook = [
+    {
+        name: 'Sergey',
+        phone: '+380445554433',
+    },
+    {
+        name: 'Vadim',
+        phone: '+123456789012',
+    },
+    {
+        name: 'Irina',
+        phone: '+483724859345',
+    },
+]
+
+function findPhoneByName(name) {
+    for (let contact of contactsBook) {
+        if (contact.name === name) return contact.phone
+    }
+}
+
+console.log(findPhoneByName('Vadim')) //"+123456789012"
+
+const contactsBook2 = {
+    sergey: {phone: '+380445554433'},
+    vadim: {phone: '+123456789012'},
+    irina: {phone: '+483724859345'},
+}
+
+function findPhoneByName2(name) {
+    return contactsBook2[name].phone
+}
+
+console.log(findPhoneByName2('vadim')) //"+123456789012"
