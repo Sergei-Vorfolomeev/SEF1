@@ -45,4 +45,14 @@ const generateKey = (length, characters) => {
     return res
 }
 
-console.log(generateKey(16, 'abcdefghijklmnopqrstuvwxyz0123456789')) // 9z0iyu72nuzwlj4z
+// console.log(generateKey(16, 'abcdefghijklmnopqrstuvwxyz0123456789')) // 9z0iyu72nuzwlj4z
+
+// 3.1) Преобразовывать строку '10.0.0.1' в массив ['10', '0', '0', '1']
+const fromStringToArray = iPAddress => iPAddress.split('.')
+
+// console.log(fromStringToArray('10.0.0.1')) // [ '10', '0', '0', '1' ]
+
+// 3.2) Преобразовываем массив ['10', '0', '0', '1'] в массив [10, 0, 0, 1]
+const fromStringToNumber = iPAddressArray => iPAddressArray.map(Number)
+
+// console.log(fromStringToNumber(['10', '0', '0', '1'])) // [ 10, 0, 0, 1 ]
