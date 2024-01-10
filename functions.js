@@ -30,8 +30,8 @@ const easierSolution = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1))
 }
 
-// console.log(random(5, 10))
-// console.log(easierSolution(20, 70))
+console.log(random(5, 10))
+console.log(easierSolution(20, 70))
 
 // 2) Реализуйте функцию generateKey(length, characters), возвращающую строку случайных символов
 // из набора characters длиной length.
@@ -45,14 +45,45 @@ const generateKey = (length, characters) => {
     return res
 }
 
-// console.log(generateKey(16, 'abcdefghijklmnopqrstuvwxyz0123456789')) // 9z0iyu72nuzwlj4z
+console.log(generateKey(16, 'abcdefghijklmnopqrstuvwxyz0123456789')) // 9z0iyu72nuzwlj4z
 
 // 3.1) Преобразовывать строку '10.0.0.1' в массив ['10', '0', '0', '1']
 const fromStringToArray = iPAddress => iPAddress.split('.')
 
-// console.log(fromStringToArray('10.0.0.1')) // [ '10', '0', '0', '1' ]
+console.log(fromStringToArray('10.0.0.1')) // [ '10', '0', '0', '1' ]
 
 // 3.2) Преобразовываем массив ['10', '0', '0', '1'] в массив [10, 0, 0, 1]
 const fromStringToNumber = iPAddressArray => iPAddressArray.map(Number)
 
-// console.log(fromStringToNumber(['10', '0', '0', '1'])) // [ 10, 0, 0, 1 ]
+console.log(fromStringToNumber(['10', '0', '0', '1'])) // [ 10, 0, 0, 1 ]
+
+// Реализуйте интроспекцию объекта:
+// -Проитерируйте все ключи объекта iface
+// -Возьмите ключи функционального типа
+// -Для каждой функции возьмите количество аргументов
+// -Сохраните результаты в двумерный массив
+
+const obj = {
+    m1: x => [x],
+    m2: 4,
+    m3: function (x, y) {
+        return [x, y];
+    },
+    m4: 'string',
+    m5(x, y, z, i, k) {
+        return [x, y, z, i, k];
+    },
+
+}
+
+const foo = (obj) => {
+    const res = []
+    for(let key in obj) {
+        if (typeof obj[key] === 'function'){
+            res.push([key, obj[key].length])
+        }
+    }
+    return res
+}
+
+console.log(foo(obj)) // [ [ 'm1', 1 ], [ 'm3', 2 ], [ 'm5', 5 ] ]
