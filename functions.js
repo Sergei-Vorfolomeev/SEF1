@@ -13,11 +13,9 @@ const random = (min = 0, max) => {
         return Math.floor(number)
     }
 
-    let randomInt = getRandom()
+    let randomInt
 
-    while (randomInt < min) {
-        randomInt = getRandom()
-    }
+    do {randomInt = getRandom()} while (randomInt < min)
 
     return randomInt
 }
