@@ -85,3 +85,5 @@ const foo = (obj) => {
 }
 
 console.log(foo(obj)) // [ [ 'm1', 1 ], [ 'm3', 2 ], [ 'm5', 5 ] ]
+
+
