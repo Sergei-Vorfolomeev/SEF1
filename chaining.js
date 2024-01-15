@@ -86,7 +86,25 @@ const qq = functor()
 
 console.log(qq + '')
 
+//Реализуйте функцию seq(...args) с использованием замыканий и чеининга,
+// которая может быть вызвана по цепочке с произвольным количеством функций,
+// а первый вызов со значением типа Number приведет к исполнению переданных ранее функций
 
+// const seq = (f) => (g) => typeof g === 'number' ? f(g) : seq((x) => f(g(x)))
+
+function seq(f) {
+    return function(g){
+        if(typeof g === 'number') {
+            return f(g)
+        } else {
+            return seq(x => f(g(x)))
+        }
+    }
+}
+
+const ww = seq(x => x + 1)(x => x * 2)(x => x / 3)(x => x - 4)(7)
+
+console.log(ww)
 
 
 
