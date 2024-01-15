@@ -71,6 +71,21 @@ const Sergey = new User('Sergey')
     .listen('music')
     .delete()
 
+//---------------------------------------------------------------------------------------------------
+
+// FUNCTOR
+const functor = (string = '') => ({
+    newLine: line => functor(string + line),
+    toString: () => string
+})
+
+const qq = functor()
+    .newLine('s1')
+    .newLine('s2')
+    .newLine('s3')   // при этом каждый раз создается новый объект => операция немутирующая
+
+console.log(qq + '')
+
 
 
 
