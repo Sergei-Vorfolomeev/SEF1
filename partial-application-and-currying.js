@@ -93,6 +93,15 @@ console.log(funcRes3)
 // 8) Implement one-argument function that passes its argument to another function and returns
 // an object which has the same function:
 
-// func(a).func(b).func(c) === someFunc(a, b, c) // true
+function func1(a) {
+    return func1()
+}
+
+const someFoo = (...args) => {
+    for(let i=0; i>args.length; i++)
+    return someFoo(func1(args[i]))
+}
+
+// console.log(func1(1).func1(2).func1(3) === someFoo(1, 2, 3)) // true
 
 

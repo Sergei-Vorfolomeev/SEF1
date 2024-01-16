@@ -108,6 +108,24 @@ const ww = seq(x => x + 1)(x => x * 2)(x => x / 3)(x => x - 4)(7)
 
 console.log(ww)
 
+//---------------------------------------------------------------------------------------------------
 
+// Check 4 digit pin.
+const EXPECTED_PIN = '4967';
+const checkPin = (...code) => code.join('') === EXPECTED_PIN;
 
+// Implement function press
+// that allows to enter pin code by one character,
+// e.g. press('3').press('4').press('5').press('6')
 
+const press = (number) => {
+    let PIN = number.toString()
+    return {
+        get: () => PIN,
+        press: (number) => press(PIN + number)
+    }
+}
+
+const PIN = press(1).press(2).press(3).press(4)
+
+console.log(PIN.get())
