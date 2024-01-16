@@ -13,8 +13,8 @@ const getMax = (a, b) => (a > b ? a : b)
 const sum = matrix.map(el => el.reduce(getSum)).reduce(getSum)
 const sumOfMax = matrix.map(el => el.reduce(getMax)).reduce(getSum)
 
-//console.log(sum)
-//console.log(sumOfMax)
+console.log(sum)
+console.log(sumOfMax)
 
 // написать протокол итерируемости массива в обратном порядке
 
