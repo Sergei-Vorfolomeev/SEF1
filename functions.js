@@ -86,4 +86,54 @@ const foo = (obj) => {
 
 console.log(foo(obj)) // [ [ 'm1', 1 ], [ 'm3', 2 ], [ 'm5', 5 ] ]
 
+// Реализуйте метод Array.prototype.map?
+
+const map =  (arr, callback) => {
+    if (!Array.isArray(arr) || !arr.length || typeof callback !== 'function') {
+        return []
+    } else {
+        const res = []
+        for (let i = 0; i < arr.length; i++) {
+            res.push(callback(arr[i], i, arr))
+        }
+        return res
+    }
+}
+
+// Реализуйте метод Array.prototype.filter?
+
+const filter = (arr, callback) => {
+    if (!Array.isArray(arr) || !arr.length || typeof callback !== 'function') {
+        return []
+    } else {
+        const res = []
+        for(let i=0; i < arr.length; i++) {
+            if(callback(arr[i], i, arr)) res.push(arr[i])
+        }
+        return res
+    }
+}
+
+
+
+// Реализуйте метод Array.prototype.reduce?
+
+const reduce = (arr, callback, init) => {
+    if (!Array.isArray(arr) || !arr.length || typeof callback !== 'function') {
+        return []
+    } else {
+        const isInit = typeof init !== 'undefined'
+        let acc = isInit? init : arr[0]
+        for(let i = isInit ? 0 : 1; i<arr.length; i++) {
+            acc = callback(acc, arr[i], i, arr)
+        }
+        return acc
+    }
+}
+
+
+
+
+
+
 
