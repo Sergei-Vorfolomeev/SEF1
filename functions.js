@@ -129,6 +129,14 @@ const reduce = (arr, callback, init) => {
     }
 }
 
+// ===========================================
+
+const duplicates = (arr) => {
+    return arr.concat(arr)
+}
+
+console.log(duplicates([1,2,3,4,5]))
+
 
 
 
