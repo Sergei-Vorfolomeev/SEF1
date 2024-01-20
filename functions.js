@@ -114,8 +114,6 @@ const filter = (arr, callback) => {
     }
 }
 
-
-
 // Реализуйте метод Array.prototype.reduce?
 
 const reduce = (arr, callback, init) => {
