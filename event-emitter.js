@@ -32,28 +32,57 @@
 // Event Emitter with closure
 
 const eventEmitter = () => {
-    const events = {}
-        return {
-            on: (name, fn) => {
-                if (events[name]) events[name].push(fn)
-                else events[name] = [fn]
-            },
-            emit: (name, ...data) => {
-                if (events[name]) {
-                    events[name].forEach(fn => fn(...data))
-                } else console.log('event was not found')
-            },
-        }
+    let events = {}
+    return {
+        on: (name, fn) => {
+            if (events[name]) events[name].push(fn)
+            else events[name] = [fn]
+        },
+        emit: (name, ...data) => {
+            if (events[name]) {
+                events[name].forEach(fn => fn(...data))
+            } else console.log('event was not found')
+        },
+        remove: (name, fn) => {
+            if (events[name]) {
+                const index = events[name].indexOf(fn)
+                if (index !== -1) events[name].splice(index, 1)
+                else console.log('such a handler does not exist')
+            } else console.log('such an event does not exist')
+        },
+        clear: (name) => {
+            if (name) delete events[name]
+            else events = {}
+        },
+        count: (name) => {
+            if (events[name]) return events[name].length
+            else console.log('such an event does not exist')
+        },
+        listeners: (name) => {
+            return events[name].slice()
+        },
+        names: () => Object.keys(events)
+    }
 
 }
 
 const emitter = eventEmitter()
 
-emitter.on('click', (data) => console.log(`CLICK EVENT WITH ${data}`))
-emitter.on('click', (data) => console.log(`SECOND CLICK EVENT WITH ${data}`))
-emitter.on('drop', (data) => console.log(`DROP EVENT WITH ${data}`))
+const fn = (data) => console.log(`CLICK ${data}`)
 
-emitter.emit('click', 'data1')
+emitter.on('click', fn)
+emitter.on('click', (data) => console.log(`SECOND CLICK ${data}`))
+emitter.on('click', (data) => console.log(`THIRD CLICK ${data}`))
+emitter.on('drop', (data) => console.log(`DROP ${data}`))
+emitter.on('move', (data) => console.log(`MOVE ${data}`))
+
+emitter.emit('click', 'string')
 emitter.emit('click', 5)
 emitter.emit('drop', true)
 emitter.emit('no-found', 10)
+
+console.log(emitter.count('click'))
+console.log(emitter.remove('click', fn))
+console.log(emitter.count('click'))
+console.log(emitter.listeners('click'))
+console.log(emitter.names())
