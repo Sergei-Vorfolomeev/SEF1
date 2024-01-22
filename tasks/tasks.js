@@ -10,3 +10,5 @@ const string = "Hello everybody! Check out my new email: <new-email@gmail.com>"
 
 const res = between(string, '<>')
 console.log(res) // new-email@gmail.com
+
+
