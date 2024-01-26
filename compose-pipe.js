@@ -7,7 +7,7 @@ const evenToUpper = string => {
         let res = ''
         for (let i=0; i < word.length; i++) {
             if (i%2) res += word[i].toUpperCase()
-            else res += word[i]
+            else res += word[i].toLowerCase()
         }
         return res
     }).join(' ')
@@ -37,6 +37,7 @@ const res4 = pipe1(firstToUpperCase, toLowerCase)(example)
 // ======================================================================================
 
 const example1 = '    SERGEY VORFOLOMEEV AHOJ KAMARAD     '
+const example2 = '    сЪешь яблОчкО БУДеТ прЫщик нА пОПЕ     '
 
 const compose2 = (...fns) => x => {
     let res = x
@@ -57,7 +58,7 @@ const pipe2 = (...fns) => x => {
 }
 
 const res5 = compose2(firstToUpperCase, evenToUpper, toLowerCase, trim)(example1)
-const res6 = pipe2(trim, toLowerCase, evenToUpper, firstToUpperCase)(example1)
+const res6 = pipe2(trim, evenToUpper)(example2)
 console.log(res5)
 console.log(res6)
 
