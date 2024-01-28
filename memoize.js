@@ -30,3 +30,21 @@ const speedTest = (name, fn, args, count) => {
 
 speedTest('fib', fib, [25], 10000)
 speedTest('mFib', mFib, [25], 10000)
+
+// ====================================================================================
+
+const memoize2 = (fn, length) => {
+    const cache = new Map()
+    return (...args) => {
+        const key = generateKeys(args)
+        if (cache.has(key)) return cache.get(key)
+        if (cache.size >= length) {
+            let firstKey = cache.keys().next().value
+            cache.delete(firstKey)
+        }
+        const res = fn(...args)
+        cache.set(key, res)
+        return res
+    }
+}
+
