@@ -72,21 +72,48 @@ const emitter = eventEmitter()
 
 const fn = (data) => console.log(`CLICK ${data}`)
 
-emitter.on('click', fn)
-emitter.on('click', (data) => console.log(`SECOND CLICK ${data}`))
-emitter.on('click', (data) => console.log(`THIRD CLICK ${data}`))
-emitter.on('drop', (data) => console.log(`DROP ${data}`))
-emitter.on('move', (data) => console.log(`MOVE ${data}`))
+// emitter.on('click', fn)
+// emitter.on('click', (data) => console.log(`SECOND CLICK ${data}`))
+// emitter.on('click', (data) => console.log(`THIRD CLICK ${data}`))
+// emitter.on('drop', (data) => console.log(`DROP ${data}`))
+// emitter.on('move', (data) => console.log(`MOVE ${data}`))
 
 emitter.emit('click', 'string')
 emitter.emit('click', 5)
 emitter.emit('drop', true)
 emitter.emit('no-found', 10)
 
-console.log(emitter.count('click'))
-console.log(emitter.remove('click', fn))
-console.log(emitter.remove('is not existed', fn))
-console.log(emitter.remove('click', () => {}))
-console.log(emitter.count('click'))
-console.log(emitter.listeners('click'))
-console.log(emitter.names())
+// console.log(emitter.count('click'))
+// console.log(emitter.remove('click', fn))
+// console.log(emitter.remove('is not existed', fn))
+// console.log(emitter.remove('click', () => {}))
+// console.log(emitter.count('click'))
+// console.log(emitter.listeners('click'))
+// console.log(emitter.names())
+
+// =====================================================================================
+
+const evEmitter = (events = {}) => Object.assign(events, {
+    on(name, fn) {
+        let event = events[name] || []
+        events[name] = event
+        event.push(fn)
+    },
+    emit(name, ...data) {
+        let event = events[name]
+        if (event) event.forEach(fn => fn(...data))
+    }
+})
+
+const emitter1 = evEmitter()
+
+emitter1.on('click', fn)
+emitter1.on('click', (data) => console.log(`SECOND CLICK ${data}`))
+emitter1.on('click', (data) => console.log(`THIRD CLICK ${data}`))
+emitter1.on('drop', (data) => console.log(`DROP ${data}`))
+emitter1.on('move', (data) => console.log(`MOVE ${data}`))
+
+emitter1.emit('click', 'string')
+emitter1.emit('click', 5)
+emitter1.emit('drop', true)
+emitter1.emit('no-found', 10)
