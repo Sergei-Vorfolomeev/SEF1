@@ -14,7 +14,7 @@ const timeout = (ms, fn) => {
     }
 }
 
-const fn = () => console.log('Function has worked')
+const fn = () => 'Function has worked'
 
 // const res = timeout(1000, fn)
 // const res2 = timeout(2000, fn)
@@ -65,10 +65,29 @@ const once = fn => (...args) => {
     return res
 }
 
-const res11 = once(fn)
-const res12 = res11()
-const res13 = res11()
-console.log(res12)
-console.log(res13)
+// const res11 = once(fn)
+// const res12 = res11()
+// const res13 = res11()
+// console.log(res12)
+// console.log(res13)
 
 // =============================================================================================
+
+// limit
+
+const limit = (fn, max) => {
+    let counter = 0
+    return (...args) => {
+        if (counter >= max) {
+            return 'Maximum function call exceeded'
+        }
+        counter++
+        return fn(...args)
+    }
+}
+
+const res14 = limit(fn, 3)
+console.log(res14())
+console.log(res14())
+console.log(res14())
+console.log(res14())
