@@ -87,7 +87,28 @@ const limit = (fn, max) => {
 }
 
 const res14 = limit(fn, 3)
-console.log(res14())
-console.log(res14())
-console.log(res14())
-console.log(res14())
+// console.log(res14())
+// console.log(res14())
+// console.log(res14())
+// console.log(res14())
+
+// =============================================================================================
+
+// cancelable
+
+const cancelable = (fn) => {
+    const wrapper = (...args) => {
+        if (fn) return fn(...args)
+        else return 'Function was canceled'
+    }
+    wrapper.cancel = () => {
+        fn = null
+    }
+    return wrapper
+}
+
+const res15 = cancelable(fn)
+console.log(res15())
+res15.cancel()
+console.log(res15())
+
