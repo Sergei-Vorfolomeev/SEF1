@@ -56,13 +56,13 @@ class Vertex {
         const vertices = new Set(args)
         const keyField = this.graph.keyField
         for (let vertex of vertices) {
-            const key = this.data[keyField]
+            const key = vertex.data[keyField]
             this.links.add(key)
-
         }
         return this
     }
 }
+
 
 const graph = new Graph('name')
 const sergeyV = graph.add(sergey)
@@ -85,4 +85,7 @@ jamhurV.link(artemV)
 //     matesGraph.addVertex(vertex)
 // })
 //
-console.log(graph)
+
+for (let vertex of graph.vertices) {
+    console.log(vertex)
+}
