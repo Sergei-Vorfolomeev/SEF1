@@ -49,7 +49,7 @@ class Vertex {
     constructor(graph, data) {
         this.graph = graph
         this.data = data
-        this.links = new Set()
+        this.links = new Map()
     }
 
     link(...args) {
@@ -57,7 +57,7 @@ class Vertex {
         const keyField = this.graph.keyField
         for (let vertex of vertices) {
             const key = vertex.data[keyField]
-            this.links.add(key)
+            this.links.set(key, vertex)
         }
         return this
     }
