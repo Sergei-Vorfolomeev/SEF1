@@ -1,34 +1,3 @@
-const artem = {
-    id: 1,
-    name: 'Artem',
-    friendsList: [6],
-}
-const fedir = {
-    id: 2,
-    name: 'Fedir',
-    friendsList: [3, 5],
-}
-const sergey = {
-    id: 3,
-    name: 'Sergey',
-    friendsList: [2, 4, 5],
-}
-const irina = {
-    id: 4,
-    name: 'Irina',
-    friendsList: [3, 5],
-}
-const vadim = {
-    id: 5,
-    name: 'Vadim',
-    friendsList: [2, 3, 4],
-}
-const jamhur = {
-    id: 6,
-    name: 'Jamhur',
-    friendsList: [1],
-}
-
 class Graph {
     constructor(keyField) {
         this.keyField = keyField
@@ -49,15 +18,15 @@ class Vertex {
     constructor(graph, data) {
         this.graph = graph
         this.data = data
-        this.links = new Map()
+        this.links = new Set()
     }
 
     link(...args) {
         const vertices = new Set(args)
-        const keyField = this.graph.keyField
+      //  const keyField = this.graph.keyField
         for (let vertex of vertices) {
-            const key = vertex.data[keyField]
-            this.links.set(key, vertex)
+          //  const key = vertex.data[keyField]
+            this.links.add(vertex)
         }
         return this
     }
@@ -65,27 +34,22 @@ class Vertex {
 
 
 const graph = new Graph('name')
-const sergeyV = graph.add(sergey)
-const irinaV = graph.add(irina)
-const artemV = graph.add(artem)
-const vadimV = graph.add(vadim)
-const fedirV = graph.add(fedir)
-const jamhurV = graph.add(jamhur)
+const sergey = graph.add({id: 3, name: 'Sergey',})
+const irina = graph.add({id: 4, name: 'Irina',})
+const artem = graph.add({id: 1, name: 'Artem',})
+const vadim = graph.add({id: 5, name: 'Vadim',})
+const fedir = graph.add({id: 2, name: 'Fedir',})
+const jamhur = graph.add({id: 6, name: 'Jamhur',})
 
-sergeyV.link(irinaV, vadimV, fedirV)
-irinaV.link(sergeyV, vadimV, sergeyV)
-artemV.link(jamhurV)
-vadimV.link(irinaV, sergeyV, fedirV)
-fedirV.link(vadimV, sergeyV)
-jamhurV.link(artemV)
-
-// const matesGraph = new Graph()
-// friendList.map(el => {
-//     const vertex = new Vertex(matesGraph, el)
-//     matesGraph.addVertex(vertex)
-// })
-//
+sergey.link(irina, vadim, fedir)
+irina.link(sergey, vadim, sergey)
+artem.link(jamhur)
+vadim.link(irina, sergey, fedir)
+fedir.link(vadim, sergey)
+jamhur.link(artem)
 
 for (let vertex of graph.vertices) {
     console.log(vertex)
 }
+
+//console.log(graph)
