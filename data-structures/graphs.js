@@ -42,6 +42,29 @@ class Graph {
         }
         return result
     }
+
+    insert (data/*array of objects*/) {
+        const newVertices = new Set(data)
+        const result = new Set()
+        for (const item of newVertices) {
+            const newVertex = new Vertex(this, item)
+            result.add(newVertex)
+            this.add(newVertex)
+        }
+        return result
+    }
+
+    link (source) {
+        const vertices = this.vertices
+        const keyField = this.keyField
+        return {
+           to(...destinations) {
+                if (vertices.has(source.data[keyField])) {
+                    source.link(...destinations)
+                }
+           }
+        }
+    }
 }
 
 class Vertex {
@@ -53,9 +76,9 @@ class Vertex {
 
     link(...args) {
         const vertices = new Set(args)
-        // const keyField = this.graph.keyField
+        const keyField = this.graph.keyField
         for (let vertex of vertices) {
-            if (!this.graph.vertices.has(vertex)) {
+            if (!this.graph.vertices.has(vertex.data[keyField])) {
                 this.graph.add(vertex)
             }
             if (!this.links.has(vertex)) {
@@ -105,10 +128,25 @@ graph.delete(artem)
 graph.add(artem)
 artem.link(jamhur)
 
-// console.log(artem)
+const [polina, rada, nikita, jaroslav] = graph.insert([
+    {name: 'Polina'},
+    {name: 'Rada'},
+    {name: 'Nikita'},
+    {name: 'Jaroslav'},
+])
+
+// console.log(graph.vertices.has(polina.data.name))
+// console.log(graph.vertices.has(rada))
+
+graph.link(polina).to(rada, irina)
+graph.link(rada).to(irina, polina)
+graph.link(nikita).to(sergey, jaroslav, irina)
+graph.link(jaroslav).to(sergey, nikita)
+
+//console.log(graph)
 //
-// for (let vertex of graph.vertices) {
-//     console.log(vertex)
-//     //console.log(vertex.map(el => el.links))
-// }
-console.log(graph.select({name: 'Sergey'}))
+for (let vertex of graph.vertices) {
+    console.log(vertex)
+    //console.log(vertex.map(el => el.links))
+}
+
