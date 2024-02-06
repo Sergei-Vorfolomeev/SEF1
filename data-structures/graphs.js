@@ -27,6 +27,21 @@ class Graph {
             }
         }
     }
+
+    select(query) {
+        const result = new Set()
+        let condition = true
+        for (const vertex of this.vertices.values()) {
+            const data = vertex.data
+            if (data) {
+                for (const key in query) {
+                    condition = condition && query[key] === data[key]
+                }
+            }
+            if (condition) result.add(vertex)
+        }
+        return result
+    }
 }
 
 class Vertex {
@@ -38,7 +53,7 @@ class Vertex {
 
     link(...args) {
         const vertices = new Set(args)
-       // const keyField = this.graph.keyField
+        // const keyField = this.graph.keyField
         for (let vertex of vertices) {
             if (!this.graph.vertices.has(vertex)) {
                 this.graph.add(vertex)
@@ -90,11 +105,10 @@ graph.delete(artem)
 graph.add(artem)
 artem.link(jamhur)
 
-console.log(artem)
-
-for (let vertex of graph.vertices) {
-    console.log(vertex)
-    //console.log(vertex.map(el => el.links))
-}
-
-//console.log(graph)
+// console.log(artem)
+//
+// for (let vertex of graph.vertices) {
+//     console.log(vertex)
+//     //console.log(vertex.map(el => el.links))
+// }
+console.log(graph.select({name: 'Sergey'}))
