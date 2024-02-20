@@ -5,7 +5,6 @@ class Graph {
     }
 
     add(vertex) {
-        //const vertex = new Vertex(this, data)
         const key = vertex.data[this.keyField]
         if (!vertex.graph) {
             vertex.graph = this
@@ -55,8 +54,7 @@ class Graph {
     }
 
     link (source) {
-        const vertices = this.vertices
-        const keyField = this.keyField
+        const {vertices, keyField} = this
         return {
            to(...destinations) {
                 if (vertices.has(source.data[keyField])) {
@@ -135,16 +133,13 @@ const [polina, rada, nikita, jaroslav] = graph.insert([
     {name: 'Jaroslav'},
 ])
 
-// console.log(graph.vertices.has(polina.data.name))
-// console.log(graph.vertices.has(rada))
-
 graph.link(polina).to(rada, irina)
 graph.link(rada).to(irina, polina)
 graph.link(nikita).to(sergey, jaroslav, irina)
 graph.link(jaroslav).to(sergey, nikita)
 
 //console.log(graph)
-//
+
 for (let vertex of graph.vertices) {
     console.log(vertex)
     //console.log(vertex.map(el => el.links))
